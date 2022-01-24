@@ -14,7 +14,7 @@ int main(void) {
 	int nRandom, fd[2];
 	pid_t pid;
   	pipe(fd); //Creating a pipe
-  	if ((pid=fork()) == 0){  //FATHER 
+  	if ((pid=fork()) == 0){  //CHILD
     		close(fd[1]);
 		char snum[5];
 		read(fd[0], snum, 5);
@@ -25,7 +25,7 @@ int main(void) {
 		printf("Menor a 500\n");
 	} close(fd[0]);
   }else{
-    close(fd[0]);  //HIJO 
+    close(fd[0]);  //FATHER
     srand(time(NULL));
     nRandom = rand() % 1000 + 1;
     char snum[5];
