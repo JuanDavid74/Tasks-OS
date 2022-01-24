@@ -12,9 +12,7 @@ int main() {
 
   pid_t pid;
   int   fd[2];
-  //char *const cmdH[] = {"sort", "file.txt" ,"-n", NULL};
   char *const cmdH[] = {"sort", STDIN_FILENO , NULL};
- // char *const cmdP[] = {"cat", "/etc/hosts",  NULL};
   char *const cmdP[] = {"cat", "/etc/hosts",  NULL};
   if (pipe(fd) == -1) {
     perror("Creating pipe");
