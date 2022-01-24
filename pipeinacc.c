@@ -12,9 +12,10 @@ int main() {
 
   pid_t pid;
   int   fd[2];
-  char *const cmdH[] = {"sort", "file.txt","-n" , NULL};
-  char *const cmdP[] = {"cat /etc/hosts", "-l", NULL};
-
+  //char *const cmdH[] = {"sort", "file.txt" ,"-n", NULL};
+  char *const cmdH[] = {"sort", STDIN_FILENO , NULL};
+ // char *const cmdP[] = {"cat", "/etc/hosts",  NULL};
+  char *const cmdP[] = {"cat", "/etc/hosts",  NULL};
   if (pipe(fd) == -1) {
     perror("Creating pipe");
     exit(EXIT_FAILURE);
@@ -31,7 +32,7 @@ int main() {
     // Execute wc
     execvp(cmdH[0], cmdH);
 
-  case -1:
+case -1:
     perror("fork() failed)");
     exit(EXIT_FAILURE);
 
@@ -43,5 +44,6 @@ int main() {
     dup2(fd[WRITE], STDOUT_FILENO);
     // Execute ls -l
     execvp(cmdP[0], cmdP);
-  }
+    exit(0); 
+	}
 }
